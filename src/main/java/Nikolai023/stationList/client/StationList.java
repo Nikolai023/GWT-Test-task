@@ -95,10 +95,9 @@ public class StationList implements EntryPoint {
                             serviceSuggestions.add(service);
                         }
                         tableServices.append(service).append(", ");
-
-                        putStationOnTable(station.getName(), station.getAddress(), station.getPhoneNumber(),
-                                tableServices.toString().substring(0, tableServices.length() - 2));
                     }
+                    putStationOnTable(station.getName(), station.getAddress(), station.getPhoneNumber(),
+                            tableServices.toString().substring(0, tableServices.length() - 2));
                 }
             }
         }
