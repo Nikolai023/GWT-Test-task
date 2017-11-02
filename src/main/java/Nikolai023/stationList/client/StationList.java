@@ -169,10 +169,10 @@ public class StationList implements EntryPoint {
     }
 
     private void initTableHeader() {
-        stationsTable.setText(0, 0, "Station name");
-        stationsTable.setText(0, 1, "Address");
-        stationsTable.setText(0, 2, "Phone number");
-        stationsTable.setText(0, 3, "Services");
+        stationsTable.setText(0, 0, "Название станции");
+        stationsTable.setText(0, 1, "Адрес");
+        stationsTable.setText(0, 2, "Телефон");
+        stationsTable.setText(0, 3, "Услуги");
         stationsTable.getRowFormatter().addStyleName(0, "stationsTableHeader");
     }
 
