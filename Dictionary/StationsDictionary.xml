@@ -2,55 +2,55 @@
 <dictionary>
     <countries>
         <country>
-            <name>Russia</name>
+            <name>Россия</name>
             <cities>
                 <city>
-                    <name>Novosibirsk</name>
+                    <name>Новосибирск</name>
                     <stations>
                         <station>
-                            <name>a</name>
-                            <address>a</address>
-                            <phoneNumber>a</phoneNumber>
+                            <name>Отделение №73</name>
+                            <address>Геодезическая, 9</address>
+                            <phoneNumber>+7 (383) 346–47–08</phoneNumber>
                             <services>
-                                <service>DELIVERY</service>
+                                <service>Получение</service>
                             </services>
                         </station>
                         <station>
-                            <name>b</name>
-                            <address>b</address>
-                            <phoneNumber>b</phoneNumber>
+                            <name>Отделение №132</name>
+                            <address>Челюскинцев, 17</address>
+                            <phoneNumber>+7 (383) 221–90–02</phoneNumber>
                             <services>
-                                <service>SENDING</service>
+                                <service>Отправка</service>
                             </services>
                         </station>
                         <station>
-                            <name>c</name>
-                            <address>c</address>
-                            <phoneNumber>c</phoneNumber>
+                            <name>Отделение №96</name>
+                            <address>Фасадная, 15</address>
+                            <phoneNumber>+7 (383) 341–12–00</phoneNumber>
                             <services>
-                                <service>DELIVERY</service>
-                                <service>SENDING</service>
+                                <service>Получение</service>
+                                <service>Отправка</service>
                             </services>
                         </station>
                     </stations>
                 </city>
                 <city>
-                    <name>Moscow</name>
+                    <name>Москва</name>
                     <stations>
                         <station>
-                            <name>d</name>
-                            <address>d</address>
-                            <phoneNumber>d</phoneNumber>
+                            <name>Отделение №125367</name>
+                            <address>Габричевского, 10 к2</address>
+                            <phoneNumber>+7 (499) 193–82–01</phoneNumber>
                             <services>
-                                <service>SENDING</service>
+                                <service>Отправка</service>
                             </services>
                         </station>
                         <station>
-                            <name>e</name>
-                            <address>e</address>
-                            <phoneNumber>e</phoneNumber>
+                            <name>Отделение №129301</name>
+                            <address>Бориса Галушкина, 17</address>
+                            <phoneNumber>+7 (495) 683–25–28</phoneNumber>
                             <services>
-                                <service>SENDING</service>
+                                <service>Отправка</service>
                             </services>
                         </station>
                     </stations>
@@ -58,23 +58,23 @@
             </cities>
         </country>
         <country>
-            <name>Kazakhstan</name>
+            <name>Казахстан</name>
             <cities>
                 <city>
-                    <name>Karaganda</name>
+                    <name>Караганда</name>
                     <stations>
                         <station>
-                            <name>f</name>
-                            <address>f</address>
-                            <phoneNumber>f</phoneNumber>
+                            <name>Отделение №9</name>
+                            <address>Ермекова, 60</address>
+                            <phoneNumber>+7 (7212) 43–18–74</phoneNumber>
                             <services>
-                                <service>DELIVERY</service>
+                                <service>Получение</service>
                             </services>
                         </station>
                         <station>
-                            <name>g</name>
-                            <address>g</address>
-                            <phoneNumber>g</phoneNumber>
+                            <name>Отделение №19</name>
+                            <address>Кривогуза, 23</address>
+                            <phoneNumber>+7 (7212) 30–50–34</phoneNumber>
                             <services>
                             </services>
                         </station>
