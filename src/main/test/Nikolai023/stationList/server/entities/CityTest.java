@@ -1,4 +1,4 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
 
 import org.junit.Test;

@@ -1,9 +1,10 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -12,47 +13,59 @@ public class DictionaryTest {
     @Test
     public void Dictionary_cloneConstructor() {
         Dictionary dictionary1 = new Dictionary();
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         Country russia = new Country();
         russia.setName("Russia");
-        ArrayList<City> russianCities = new ArrayList<City>();
+        ArrayList<City> russianCities = new ArrayList<>();
         City novosibirsk = new City();
         novosibirsk.setName("Novosibirsk");
-        ArrayList<Station> novosibirskStations = new ArrayList<Station>();
+        ArrayList<Station> novosibirskStations = new ArrayList<>();
         Station aStation = new Station();
         aStation.setName("a");
         aStation.setAddress("a");
         aStation.setPhoneNumber("a");
-        aStation.setServices(Arrays.asList("DELIVERY"));
+        Service aService = new Service();
+        aService.setName("DELIVERY");
+        aStation.setServices(Collections.singletonList(aService));
         novosibirskStations.add(aStation);
         Station bStation = new Station();
         bStation.setName("b");
         bStation.setAddress("b");
         bStation.setPhoneNumber("b");
-        bStation.setServices(Arrays.asList("SENDING"));
+        Service bService = new Service();
+        bService.setName("SENDING");
+        bStation.setServices(Collections.singletonList(bService));
         novosibirskStations.add(bStation);
         Station cStation = new Station();
         cStation.setName("c");
         cStation.setAddress("c");
         cStation.setPhoneNumber("c");
-        cStation.setServices(Arrays.asList("DELIVERY", "SENDING"));
+        Service cService1 = new Service();
+        cService1.setName("DELIVERY");
+        Service cService2 = new Service();
+        cService2.setName("SENDING");
+        cStation.setServices(Arrays.asList(cService1, cService2));
         novosibirskStations.add(cStation);
         novosibirsk.setStations(novosibirskStations);
         russianCities.add(novosibirsk);
         City moscow = new City();
         moscow.setName("Moscow");
-        ArrayList<Station> moscowStations = new ArrayList<Station>();
+        ArrayList<Station> moscowStations = new ArrayList<>();
         Station dStation = new Station();
         dStation.setName("d");
         dStation.setAddress("d");
         dStation.setPhoneNumber("d");
-        dStation.setServices(Arrays.asList("SENDING"));
+        Service dService = new Service();
+        dService.setName("SENDING");
+        dStation.setServices(Collections.singletonList(dService));
         moscowStations.add(dStation);
         Station eStation = new Station();
         eStation.setName("e");
         eStation.setAddress("e");
         eStation.setPhoneNumber("e");
-        eStation.setServices(Arrays.asList("SENDING"));
+        Service eService = new Service();
+        eService.setName("SENDING");
+        eStation.setServices(Collections.singletonList(eService));
         moscowStations.add(eStation);
         moscow.setStations(moscowStations);
         russianCities.add(moscow);
@@ -60,21 +73,23 @@ public class DictionaryTest {
         countries.add(russia);
         Country kazakhstan = new Country();
         kazakhstan.setName("Kazakhstan");
-        ArrayList<City> kazakhstanCities = new ArrayList<City>();
+        ArrayList<City> kazakhstanCities = new ArrayList<>();
         City karaganda = new City();
         karaganda.setName("Karaganda");
-        ArrayList<Station> karagandaStations = new ArrayList<Station>();
+        ArrayList<Station> karagandaStations = new ArrayList<>();
         Station fStation = new Station();
         fStation.setName("f");
         fStation.setAddress("f");
         fStation.setPhoneNumber("f");
-        fStation.setServices(Arrays.asList("DELIVERY"));
+        Service fService = new Service();
+        fService.setName("DELIVERY");
+        fStation.setServices(Collections.singletonList(fService));
         karagandaStations.add(fStation);
         Station gStation = new Station();
         gStation.setName("g");
         gStation.setAddress("g");
         gStation.setPhoneNumber("g");
-        gStation.setServices(new ArrayList<String>());
+        gStation.setServices(new ArrayList<>());
         karagandaStations.add(gStation);
         karaganda.setStations(karagandaStations);
         kazakhstanCities.add(karaganda);
@@ -89,10 +104,10 @@ public class DictionaryTest {
     @Test
     public void equals_equalCountries() {
         Dictionary dictionary1 = new Dictionary();
-        dictionary1.setCountries(new ArrayList<Country>());
+        dictionary1.setCountries(new ArrayList<>());
 
         Dictionary dictionary2 = new Dictionary();
-        dictionary2.setCountries(new ArrayList<Country>());
+        dictionary2.setCountries(new ArrayList<>());
 
         assertEquals(dictionary1, dictionary2);
     }

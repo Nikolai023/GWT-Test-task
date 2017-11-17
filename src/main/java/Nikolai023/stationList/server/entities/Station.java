@@ -1,16 +1,19 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Station implements IsSerializable {
+@XmlRootElement(name = "station")
+public class Station implements Serializable {
     private String name;
     private String address;
     private String phoneNumber;
-    private List<String> services = new ArrayList<String>();
+    private List<Service> services = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -24,23 +27,28 @@ public class Station implements IsSerializable {
         return phoneNumber;
     }
 
-    public List<String> getServices() {
+    public List<Service> getServices() {
         return services;
     }
 
+    @XmlElement(name = "name")
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlElement(name = "address")
     public void setAddress(String address) {
         this.address = address;
     }
 
+    @XmlElement(name = "phoneNumber")
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setServices(List<String> services) {
+    @XmlElementWrapper(name = "services")
+    @XmlElement(name = "service")
+    public void setServices(List<Service> services) {
         this.services = services;
     }
 

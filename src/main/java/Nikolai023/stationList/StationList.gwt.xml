@@ -9,7 +9,8 @@
     <entry-point class='Nikolai023.stationList.client.StationList'/>
 
     <inherits name="com.google.gwt.user.theme.chrome.Chrome"/>
-
+    <source path="shared"/>
+    <source path="client"/>
     <!-- Specify the app servlets.                   -->
     <servlet path='/StationListService' class='Nikolai023.stationList.server.StationListServiceImpl'/>
 </module>

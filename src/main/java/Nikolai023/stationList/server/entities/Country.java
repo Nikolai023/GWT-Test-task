@@ -1,14 +1,17 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Country implements IsSerializable {
+@XmlRootElement(name = "country")
+public class Country implements Serializable {
     private String name;
-    private List<City> cities = new ArrayList<City>();
+    private List<City> cities = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -18,10 +21,13 @@ public class Country implements IsSerializable {
         return cities;
     }
 
+    @XmlElement(name =  "name")
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlElementWrapper(name = "cities")
+    @XmlElement(name = "city")
     public void setCities(List<City> cities) {
         this.cities = cities;
     }

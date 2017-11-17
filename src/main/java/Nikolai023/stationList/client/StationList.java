@@ -1,23 +1,20 @@
 package Nikolai023.stationList.client;
 
-import Nikolai023.stationList.client.datatypes.City;
-import Nikolai023.stationList.client.datatypes.Country;
-import Nikolai023.stationList.client.datatypes.Dictionary;
-import Nikolai023.stationList.client.datatypes.Station;
 import Nikolai023.stationList.client.filter.Filter;
 import Nikolai023.stationList.client.ui.SuggestBoxWithData;
+import Nikolai023.stationList.shared.DictionaryData;
+import Nikolai023.stationList.shared.SharedService;
+import Nikolai023.stationList.shared.SharedStation;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle;
 
-import java.util.ArrayList;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -33,29 +30,25 @@ public class StationList implements EntryPoint {
     private final RootPanel mainPanel = RootPanel.get("mainPanel");
 
     private final Filter filter = new Filter();
-    private final AsyncCallback<Dictionary> callback = new AsyncCallback<Dictionary>() {
+    private final AsyncCallback<DictionaryData> callback = new AsyncCallback<DictionaryData>() {
         public void onFailure(Throwable caught) {
             caught.printStackTrace();
         }
 
-        public void onSuccess(Dictionary result) {
+        public void onSuccess(DictionaryData result) {
             clearBoxesAndTable();
             initTableHeader();
             refreshBoxesAndTable(result);
             setUpBoxesAvailability();
         }
     };
-    private final KeyUpHandler keyUpHandler = new KeyUpHandler() {
-        public void onKeyUp(KeyUpEvent event) {
-            setUpFilter();
-            stationListServiceAsync.retrieveData(filter, callback);
-        }
+    private final KeyUpHandler keyUpHandler = event -> {
+        setUpFilter();
+        stationListServiceAsync.retrieveData(filter, callback);
     };
-    private final SelectionHandler<SuggestOracle.Suggestion> selectionHandler = new SelectionHandler<SuggestOracle.Suggestion>() {
-        public void onSelection(SelectionEvent<SuggestOracle.Suggestion> event) {
-            setUpFilter();
-            stationListServiceAsync.retrieveData(filter, callback);
-        }
+    private final SelectionHandler<SuggestOracle.Suggestion> selectionHandler = event -> {
+        setUpFilter();
+        stationListServiceAsync.retrieveData(filter, callback);
     };
 
     /**
@@ -80,30 +73,20 @@ public class StationList implements EntryPoint {
         stationListServiceAsync.retrieveData(filter, callback);
     }
 
-    private void refreshBoxesAndTable(Dictionary result) {
-        ArrayList<String> countrySuggestions = new ArrayList<String>();
-        ArrayList<String> citySuggestions = new ArrayList<String>();
-        ArrayList<String> serviceSuggestions = new ArrayList<String>();
-        for (Country country : result.getCountries()) {
-            countrySuggestions.add(country.getName());
-            for (City city : country.getCities()) {
-                citySuggestions.add(city.getName());
-                for (Station station : city.getStations()) {
-                    StringBuilder tableServices = new StringBuilder();
-                    for (String service : station.getServices()) {
-                        if (!serviceSuggestions.contains(service)) {
-                            serviceSuggestions.add(service);
-                        }
-                        tableServices.append(service).append(", ");
-                    }
-                    putStationOnTable(station.getName(), station.getAddress(), station.getPhoneNumber(),
-                            tableServices.toString().substring(0, tableServices.length() - 2));
-                }
+    private void refreshBoxesAndTable(DictionaryData result) {
+        for (SharedStation station : result.getStationList()) {
+            StringBuilder tableServices = new StringBuilder();
+            for (SharedService service : station.getServices()) {
+                tableServices.append(service).append(", ");
             }
+            putStationOnTable(station.getName(), station.getAddress(), station.getPhoneNumber(),
+                    tableServices.toString().substring(0, tableServices.length() - 2));
         }
-        serviceBox.setData(serviceSuggestions);
-        countryBox.setData(countrySuggestions);
-        cityBox.setData(citySuggestions);
+
+
+        serviceBox.setData(result.getServiceList());
+        countryBox.setData(result.getCountryList());
+        cityBox.setData(result.getCityList());
     }
 
     private void setUpBoxesAvailability() {
@@ -136,11 +119,7 @@ public class StationList implements EntryPoint {
     }
 
     private void initSuggestBox(final SuggestBox suggestBox) {
-        suggestBox.getValueBox().addFocusHandler(new FocusHandler() {
-            public void onFocus(FocusEvent event) {
-                suggestBox.showSuggestionList();
-            }
-        });
+        suggestBox.getValueBox().addFocusHandler(event -> suggestBox.showSuggestionList());
         suggestBox.setLimit(5);
         suggestBox.addSelectionHandler(selectionHandler);
         suggestBox.addKeyUpHandler(keyUpHandler);

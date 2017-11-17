@@ -1,35 +1,38 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Dictionary implements IsSerializable {
-    private List<Country> countries = new ArrayList<Country>();
+@XmlRootElement(name = "dictionary")
+public class Dictionary implements Serializable {
+    private List<Country> countries = new ArrayList<>();
 
     public Dictionary() {
     }
 
     public Dictionary(Dictionary dictionary) {
-        ArrayList<Country> clonedCountriesArrayList = new ArrayList<Country>();
+        ArrayList<Country> clonedCountriesArrayList = new ArrayList<>();
         for (Country country : dictionary.countries) {
             Country clonedCountry = new Country();
             clonedCountry.setName(country.getName());
-            ArrayList<City> clonedCities = new ArrayList<City>();
+            ArrayList<City> clonedCities = new ArrayList<>();
             for (City city : country.getCities()) {
                 City clonedCity = new City();
                 clonedCity.setName(city.getName());
 
-                ArrayList<Station> clonedStations = new ArrayList<Station>();
+                ArrayList<Station> clonedStations = new ArrayList<>();
                 for (Station station : city.getStations()) {
                     Station clonedStation = new Station();
                     clonedStation.setName(station.getName());
                     clonedStation.setAddress(station.getAddress());
                     clonedStation.setPhoneNumber(station.getPhoneNumber());
 
-                    ArrayList<String> clonedServices = new ArrayList<String>(station.getServices());
+                    ArrayList<Service> clonedServices = new ArrayList<>(station.getServices());
                     clonedStation.setServices(clonedServices);
                     clonedStations.add(clonedStation);
                 }
@@ -47,6 +50,8 @@ public class Dictionary implements IsSerializable {
         return countries;
     }
 
+    @XmlElementWrapper(name = "countries")
+    @XmlElement(name = "country")
     public void setCountries(List<Country> countries) {
         this.countries = countries;
     }

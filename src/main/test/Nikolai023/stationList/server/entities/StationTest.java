@@ -1,7 +1,10 @@
-package Nikolai023.stationList.client.datatypes;
+package Nikolai023.stationList.server.entities;
 
 
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -23,7 +26,7 @@ public class StationTest {
         station2.setAddress(stationAddress);
         station2.setPhoneNumber(stationPhoneNumber);
 
-        assertEquals(station1,station2);
+        assertEquals(station1, station2);
     }
 
     @Test
@@ -46,7 +49,7 @@ public class StationTest {
         station1.setAddress(station2Address);
         station1.setPhoneNumber(station2PhoneNumber);
 
-        assertNotEquals(station1,station2);
+        assertNotEquals(station1, station2);
     }
 
     @Test
@@ -59,14 +62,18 @@ public class StationTest {
         station1.setName(stationName);
         station1.setAddress(stationAddress);
         station1.setPhoneNumber(stationPhoneNumber);
-        station1.getServices().add("station1Service");
+        Service service1 = new Service();
+        service1.setName("station1Service");
+        station1.setServices(Collections.singletonList(service1));
 
         Station station2 = new Station();
         station2.setName(stationName);
         station2.setAddress(stationAddress);
         station2.setPhoneNumber(stationPhoneNumber);
-        station2.getServices().add("station2Service");
+        Service service2 = new Service();
+        service2.setName("station2Service");
+        station2.setServices(Collections.singletonList(service2));
 
-        assertNotEquals(station1,station2);
+        assertNotEquals(station1, station2);
     }
 }
